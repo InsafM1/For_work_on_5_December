@@ -17,14 +17,42 @@ namespace topit
     p_t next(p_t) const override;
     p_t d; 
   };
+  size_t points(const IDraw& d, p_t ** pts, size_t& s);
+  f_t frame(const p_t * pts, size_t s);
 }
 int main()
 {
   using topit::p_t;
-  IDraw * p = new Dot(10, 10);
-  IDraw * p = new Dot(p_t{10, 10});
-  delete p;
-  delete pp;
+  using topit::Dot;
+  using topit::f_t;
+  int err = 0;
+  IDraw* shps[3] = {}; //несколько раз подряд new нельзя!
+  p_t * ptr = nullptr;
+  size_t s;  
+  try {
+    shps[0] = new Dot(0, 0);
+    shps[1] = new Dot(5, 7);
+    shps[2] = new Dot(-5, -2);
+    //TODO:
+    for (sizet i = 0; i < 3; ++i){
+      s += points(*(shps[i], &pts, s));
+    }
+    f_t fr = frame(pts, s);
+    // достать все точки из фигур
+    // посчитать ограничивающий прямоугольник
+    // подготовить полотно () нужнго размера
+    // заполнить полотно .
+    // нароисовать на полотне все точки
+    // - будем рисовать #
+    // вывести полотно на экран
+  } catch (...) {
+    err = 2;
+    std::cerr << "Bad Drawing\n";
+  }
+  delete [] ptr;
+  for (int i = 0; i < 3; ++i){
+    delete shps[i];
+  }
 }
 topit::Dot::Dot(p_t dd): IDraw(), d{dd}
 {}
