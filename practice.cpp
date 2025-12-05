@@ -7,7 +7,7 @@ namespace topit
   struct IDraw {
     virtual p_t begin() const = 0; // = 0 метод чисто виртуальный, мы не предоставляем метод
     virtual p_t next(p_t) const = 0;
-    virtual ~IDraw();
+    virtual ~IDraw() = default;
   };
   struct f_t { p_t aa, bb; };
 }
