@@ -10,6 +10,10 @@ namespace topit
     virtual ~IDraw() = default;
   };
   struct f_t { p_t aa, bb; };
+  struct Dot: IDraw {
+    p_t begin() const override;
+    p_t next(p_t) const override; 
+  };
 }
 int main()
 {
